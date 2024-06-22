@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Moving car</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body{
+            background: white;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+        .box{
+            width: 500px;
+            height: 450px;
+            background: white;
+            position: relative;
+            margin: 0 auto;
+            border-radius: 5px;
+            box-shadow: 2px 2px 8px black;
+        }
+        h1{
+            color: red;
+            text-align: center;
+        }
+        #redcar{
+           background: transparent;
+           width: 50px;
+           height: 80px;
+           position: absolute;
+        }
+        #label{
+            font-size: 30px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <h1>Moving Car</h1>
+   <center> <label id="label"></label></center>
+    <div class="box">
+      <img src="./redcar.jpg" alt="" id="redcar">
+    </div>
+    <script>
+        var car=document.getElementById("redcar");
+        var lb=document.getElementById("label")
+        var x=0;
+        var y=0;
+        var steps=10;
+        window.onkeydown=start;
+        function start(e){
+             if(e.keyCode=='39'){
+                moveCar('right')
+             }
+             else if(e.keyCode=="37"){
+                moveCar('left')
+             }
+             else if(e.keyCode=="38"){
+                moveCar('up')
+             }
+             else if(e.keyCode=="40"){
+                moveCar('down')
+             }
+        }
+        function moveCar(dir){
+                if(dir=="right" && x<450){
+                    x=x+steps;
+                    car.style.transform="translate("+x+"px,"+y+"px) rotate(90deg)"
+                    lb.innerHTML="Way Right"
+                    lb.style.color="blue"
+                    document.body.style.background="rgba(200,0,150,0.5)"
+                }
+                else if(dir=="left" && x>0){
+                    x=x-steps;
+                    car.style.transform="translate("+x+"px,"+y+"px) rotate(-90deg)"
+                    lb.innerHTML="Way Left"
+                    lb.style.color="red"
+                    document.body.style.background="lightgreen"
+
+                }
+                else if(dir=="up" && y>0){
+                    y=y-steps;
+                    car.style.transform="translate("+x+"px,"+y+"px) rotate(0deg)"
+                    lb.innerHTML="Way up"
+                    lb.style.color="green"
+                    document.body.style.background="lightgray"
+
+                }
+                else if(dir=="down" &&y<370){
+                    y=y+steps;
+                    car.style.transform="translate("+x+"px,"+y+"px) rotate(180deg)"
+                    lb.innerHTML="Way Down"
+                    lb.style.color="pink"
+                    document.body.style.background="lightblue"
+
+                }
+        }
+    </script>
+</body>
+</html>
